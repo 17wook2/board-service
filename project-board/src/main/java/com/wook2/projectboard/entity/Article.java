@@ -39,6 +39,17 @@ public class Article extends BaseEntity{
         return new Article(title,content,hashtag);
     }
 
+    private void addComment(ArticleComment articleComment){
+        articleComments.add(articleComment);
+        articleComment.setArticle(this);
+    }
+
+    private void removeComment(ArticleComment articleComment) {
+        articleComments.remove(articleComment);
+        articleComment.setArticle(null);
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

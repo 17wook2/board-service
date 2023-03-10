@@ -9,7 +9,6 @@ logging:
     com.wook2.projectboard: debug
     org.springframework.web.servlet : debug
     org.hibernate.sql : debug
-    org.hibernate.type: trace
 
 spring:
   datasource:
