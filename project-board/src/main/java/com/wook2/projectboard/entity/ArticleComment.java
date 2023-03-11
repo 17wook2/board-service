@@ -21,7 +21,7 @@ public class ArticleComment extends BaseEntity{
     @Setter
     @ManyToOne(fetch = FetchType.LAZY)
     private Article article;
-    private String content;
+    @Column(length = 10000) private String content;
 
     private ArticleComment(Article article, String content) {
         this.article = article;

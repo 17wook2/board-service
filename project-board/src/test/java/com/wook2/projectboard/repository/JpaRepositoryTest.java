@@ -23,11 +23,21 @@ class JpaRepositoryTest {
     @DisplayName("select 테스트")
     @Test
     void dataJPA_test(){
+        long count = articleRepository.count();
         Article article = Article.of("title1", "content1", "hashtag1");
         Article savedArticle = articleRepository.save(article);
-        List<Article> articles = articleRepository.findAll();
-        Article findArticle = articles.get(0);
-        assertThat(savedArticle).isEqualTo(findArticle);
+        long updatedCount = articleRepository.count();
+        assertThat(updatedCount).isEqualTo(count + 1);
+    }
+
+    @DisplayName("update 테스트")
+    @Test
+    void dataJPA_update_test(){
+        Article article = articleRepository.findById(1L).orElseThrow();
+        article.setHashtag("updatedHashtag");
+        Article savedArticle = articleRepository.saveAndFlush(article);
+        assertThat(savedArticle).hasFieldOrPropertyWithValue("hashtag", "updatedHashtag");
+
     }
 
 
