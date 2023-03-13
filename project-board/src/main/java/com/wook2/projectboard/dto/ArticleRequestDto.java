@@ -10,7 +10,7 @@ import java.io.Serializable;
  * A DTO for the {@link com.wook2.projectboard.entity.Article} entity
  */
 @Data
-public class ArticleRequestDto implements Serializable {
+public class ArticleRequestDto{
     private final String title;
     private final String content;
     private final String hashtag;

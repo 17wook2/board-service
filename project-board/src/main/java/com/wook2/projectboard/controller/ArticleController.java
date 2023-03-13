@@ -12,6 +12,12 @@ import java.util.List;
 @Controller
 public class ArticleController {
 
+    @GetMapping
+    public String articles(ModelMap map) {
+        map.addAttribute("articles", List.of());
+        return "articles/index";
+    }
+
     @GetMapping("/{articleId}")
     public String article(@PathVariable Long articleId, ModelMap map) {
         map.addAttribute("article","article");
