@@ -1,5 +1,6 @@
 package com.wook2.projectboard.entity;
 
+import com.wook2.projectboard.dto.ArticleRequestDto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -26,6 +27,7 @@ public class Article extends BaseEntity{
     @ToString.Exclude
     private final Set<ArticleComment> articleComments = new LinkedHashSet<>();
 
+
     private Article(String title, String content, String hashtag) {
         this.title = title;
         this.content = content;
@@ -46,6 +48,11 @@ public class Article extends BaseEntity{
         articleComment.setArticle(null);
     }
 
+    public void update(ArticleRequestDto articleRequestDto){
+        title = articleRequestDto.getTitle();
+        content = articleRequestDto.getContent();
+        hashtag = articleRequestDto.getHashtag();
+    }
 
     @Override
     public boolean equals(Object o) {
