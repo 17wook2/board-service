@@ -1,10 +1,7 @@
 package com.wook2.projectboard.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.LinkedHashSet;
 import java.util.Objects;
@@ -21,9 +18,9 @@ public class Article extends BaseEntity{
     private Long id;
 
     @Column(nullable = false) private String title;
-    @Column(nullable = false) private String content;
+    @Column(nullable = false, length = 10000) private String content;
 
-    private String hashtag;
+    @Setter private String hashtag;
 
     @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
     @ToString.Exclude
@@ -38,6 +35,17 @@ public class Article extends BaseEntity{
     public static Article of(String title, String content, String hashtag){
         return new Article(title,content,hashtag);
     }
+
+    private void addComment(ArticleComment articleComment){
+        articleComments.add(articleComment);
+        articleComment.setArticle(this);
+    }
+
+    private void removeComment(ArticleComment articleComment) {
+        articleComments.remove(articleComment);
+        articleComment.setArticle(null);
+    }
+
 
     @Override
     public boolean equals(Object o) {
