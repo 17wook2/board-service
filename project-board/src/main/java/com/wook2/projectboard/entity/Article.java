@@ -3,7 +3,6 @@ package com.wook2.projectboard.entity;
 import com.wook2.projectboard.dto.ArticleRequestDto;
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -23,8 +22,9 @@ public class Article extends BaseEntity{
 
     @Setter private String hashtag;
 
-    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
     @ToString.Exclude
+    @OrderBy("createdDate DESC")
+    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
     private final Set<ArticleComment> articleComments = new LinkedHashSet<>();
 
 
